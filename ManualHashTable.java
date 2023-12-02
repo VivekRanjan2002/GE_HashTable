@@ -28,20 +28,32 @@ public class ManualHashTable<K,V> {
         return index;
     }
 /*
-@desc: add the MyMapNode object with key and value in linked list of array
+@desc: update the MyMapNode object with new values if present and add
+ new MyMapNode object with key value pair if not present earlier in linked list of array
        at computed hash index
  */
     public void  put(K key,V values){
         int index= getIndex(key);
-         frequencyContainer[index].add(new MyMapNode(key,values));
+        boolean found=false;
+        for(MyMapNode<K,V> node :frequencyContainer[index]){
+            if(node.key.equals(key)){
+                node.value=values;
+                found=true;
+                break;
+            }
+        }
+
+        if(!found) frequencyContainer[index].add(new MyMapNode<K,V>(key,values));
         return;
     }
  /*
- @desc: return the size of list at computed hash index of key in array
+ @desc: return the si at computed hash index of key in array
   */
-    public int getfreq(K key){
+    public V getfreq(K key){
         int index= getIndex(key);
-
-       return frequencyContainer[index].size();
+        for(MyMapNode<K,V> node: frequencyContainer[index]) {
+            if (node.key.equals(key)) return node.value;
+        }
+        return null;
     }
 }
