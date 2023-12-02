@@ -10,7 +10,7 @@ public class Main {
         ManualHashTable<String,Integer> map= new ManualHashTable(100);
         for(String word:words){
             Integer freq= map.getfreq(word);
-            if(freq!=0){
+            if(freq!=null){
                 freq=freq+1;
                 map.put(word,freq);
             }
